@@ -20,7 +20,7 @@ Skills trigger automatically — your coding agent just has Superpowers.
 
 First, clone the repo once:
 ```bash
-git clone https://github.com/obra/superpowers.git ~/.copilot/superpowers
+git clone https://github.com/autovant/superpowers.git ~/.copilot/superpowers
 ```
 
 Then run in any project to add superpowers:
@@ -143,7 +143,7 @@ Run the installer with `-Uninstall` / `--uninstall`:
 
 ## Credits
 
-Based on [obra/superpowers](https://github.com/obra/superpowers) by Jesse Vincent.
+Forked from [obra/superpowers](https://github.com/obra/superpowers) by Jesse Vincent.
 
 ## License
 

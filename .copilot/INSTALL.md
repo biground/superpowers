@@ -10,8 +10,7 @@
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/obra/superpowers.git ~/.copilot/superpowers
-```
+   git clone https://github.com/autovant/superpowers.git ~/.copilot/superpowers
 
 **Windows (PowerShell):**
 ```powershell

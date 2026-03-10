@@ -6,7 +6,7 @@ Guide for using Superpowers with GitHub Copilot in VS Code (agent mode).
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/obra/superpowers.git ~/.copilot/superpowers
+   git clone https://github.com/autovant/superpowers.git ~/.copilot/superpowers
    ```
 
 2. Add the superpowers instructions to your project's `.github/copilot-instructions.md` (see [INSTALL.md](../.copilot/INSTALL.md) for the template).
