@@ -19,21 +19,27 @@ This is not negotiable. This is not optional. You cannot rationalize your way ou
 
 Superpowers skills override default system prompt behavior, but **user instructions always take precedence**:
 
-1. **User's explicit instructions** (CLAUDE.md, AGENTS.md, direct requests) — highest priority
+1. **User's explicit instructions** (copilot-instructions.md, .instructions.md, direct requests) — highest priority
 2. **Superpowers skills** — override default system behavior where they conflict
 3. **Default system prompt** — lowest priority
 
-If CLAUDE.md or AGENTS.md says "don't use TDD" and a skill says "always use TDD," follow the user's instructions. The user is in control.
+If your project instructions say "don't use TDD" and a skill says "always use TDD," follow the user's instructions. The user is in control.
 
 ## How to Access Skills
 
-**In Claude Code:** Use the `Skill` tool. When you invoke a skill, its content is loaded and presented to you—follow it directly. Never use the Read tool on skill files.
+Use `read_file` on the skill's SKILL.md file to load it. Skills are referenced by file path from your `.github/copilot-instructions.md`.
 
-**In other environments:** Check your platform's documentation for how skills are loaded.
+## Tool Mapping
 
-## Platform Adaptation
+Some skills reference Claude Code tool names. Use these Copilot equivalents:
 
-Skills use Claude Code tool names. Non-CC platforms: see `references/codex-tools.md` for tool equivalents.
+- `Task` → `runSubagent`
+- `TodoWrite` → `manage_todo_list`
+- `Skill` → `read_file` on the SKILL.md path
+- `Read` / `Write` / `Edit` → `read_file` / `create_file` / `replace_string_in_file`
+- `Bash` → `run_in_terminal`
+
+Full mapping: `references/copilot-tools.md`
 
 # Using Skills
 
@@ -48,10 +54,10 @@ digraph skill_flow {
     "Already brainstormed?" [shape=diamond];
     "Invoke brainstorming skill" [shape=box];
     "Might any skill apply?" [shape=diamond];
-    "Invoke Skill tool" [shape=box];
+    "Read skill file" [shape=box];
     "Announce: 'Using [skill] to [purpose]'" [shape=box];
     "Has checklist?" [shape=diamond];
-    "Create TodoWrite todo per item" [shape=box];
+    "Create manage_todo_list per item" [shape=box];
     "Follow skill exactly" [shape=box];
     "Respond (including clarifications)" [shape=doublecircle];
 
@@ -61,13 +67,13 @@ digraph skill_flow {
     "Invoke brainstorming skill" -> "Might any skill apply?";
 
     "User message received" -> "Might any skill apply?";
-    "Might any skill apply?" -> "Invoke Skill tool" [label="yes, even 1%"];
+    "Might any skill apply?" -> "Read skill file" [label="yes, even 1%"];
     "Might any skill apply?" -> "Respond (including clarifications)" [label="definitely not"];
-    "Invoke Skill tool" -> "Announce: 'Using [skill] to [purpose]'";
+    "Read skill file" -> "Announce: 'Using [skill] to [purpose]'";
     "Announce: 'Using [skill] to [purpose]'" -> "Has checklist?";
-    "Has checklist?" -> "Create TodoWrite todo per item" [label="yes"];
+    "Has checklist?" -> "Create manage_todo_list per item" [label="yes"];
     "Has checklist?" -> "Follow skill exactly" [label="no"];
-    "Create TodoWrite todo per item" -> "Follow skill exactly";
+    "Create manage_todo_list per item" -> "Follow skill exactly";
 }
 ```
 
