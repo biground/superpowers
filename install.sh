@@ -61,6 +61,15 @@ To load a skill, use \`read_file\` on the SKILL.md file path below. Read the ski
 - **dispatching-parallel-agents**: $SKILLS_PREFIX/dispatching-parallel-agents/SKILL.md
 - **writing-skills**: $SKILLS_PREFIX/writing-skills/SKILL.md
 
+### Output Language
+
+For any workflow started by these installed prompts or skills, default all user-facing planning and requirements documents to Simplified Chinese.
+
+- This applies to design docs, specs, implementation plans, requirement summaries, task breakdowns, review writeups, and similar documents produced by the main agent or any subagent.
+- Preserve code, commands, file paths, identifiers, API names, and other technical literals in their original language unless translating them improves clarity.
+- If the user explicitly requests another language, follow that request.
+- If you are updating an existing document, keep its language consistent unless the user asks to convert it.
+
 ### Tool Mapping
 
 Skills reference Claude Code tool names. Use these Copilot equivalents:
