@@ -1,27 +1,27 @@
 ---
 name: verification-before-completion
-description: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always
+description: 在准备声称工作已经完成、修复或通过之前使用，尤其是在提交或创建 PR 之前；必须先运行验证命令并确认输出，任何成功结论都要先有证据
 ---
 
-# Verification Before Completion
+# 完成前先验证
 
-## Overview
+## 概览
 
-Claiming work is complete without verification is dishonesty, not efficiency.
+没有验证就声称工作完成，不是高效，而是不诚实。
 
-**Core principle:** Evidence before claims, always.
+**核心原则：** 先有证据，再下结论，永远如此。
 
-**Violating the letter of this rule is violating the spirit of this rule.**
+**违背这条规则的字面要求，也是在违背它的精神。**
 
-## The Iron Law
+## 铁律
 
 ```
 NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE
 ```
 
-If you haven't run the verification command in this message, you cannot claim it passes.
+如果你没有在当前这次交互中实际运行验证命令，就不能声称它已经通过。
 
-## The Gate Function
+## 闸门函数
 
 ```
 BEFORE claiming any status or expressing satisfaction:
@@ -37,103 +37,103 @@ BEFORE claiming any status or expressing satisfaction:
 Skip any step = lying, not verifying
 ```
 
-## Common Failures
+## 常见失败模式
 
-| Claim | Requires | Not Sufficient |
+| 声明 | 需要什么 | 什么还不够 |
 |-------|----------|----------------|
-| Tests pass | Test command output: 0 failures | Previous run, "should pass" |
-| Linter clean | Linter output: 0 errors | Partial check, extrapolation |
-| Build succeeds | Build command: exit 0 | Linter passing, logs look good |
-| Bug fixed | Test original symptom: passes | Code changed, assumed fixed |
-| Regression test works | Red-green cycle verified | Test passes once |
-| Agent completed | VCS diff shows changes | Agent reports "success" |
-| Requirements met | Line-by-line checklist | Tests passing |
+| 测试通过 | 测试命令输出为 0 failures | 之前跑过、"应该会过" |
+| Linter 干净 | Linter 输出为 0 errors | 只跑了部分检查、靠推断外推 |
+| 构建成功 | 构建命令退出码为 0 | Linter 通过、日志看起来不错 |
+| Bug 已修复 | 原始症状对应的测试通过 | 代码改了、所以默认修好了 |
+| 回归测试有效 | 红绿循环经过验证 | 测试只通过过一次 |
+| 代理已完成 | VCS diff 里真的有对应改动 | 代理口头说了 "success" |
+| 需求已满足 | 逐条 checklist 对照完成 | 仅仅测试通过 |
 
-## Red Flags - STOP
+## 红旗信号：立刻停止
 
-- Using "should", "probably", "seems to"
-- Expressing satisfaction before verification ("Great!", "Perfect!", "Done!", etc.)
-- About to commit/push/PR without verification
-- Trusting agent success reports
-- Relying on partial verification
-- Thinking "just this once"
-- Tired and wanting work over
-- **ANY wording implying success without having run verification**
+- 使用 "should"、"probably"、"seems to" 这类措辞
+- 在验证之前表达满意（"Great!"、"Perfect!"、"Done!" 等）
+- 没验证就准备 commit / push / 开 PR
+- 直接相信代理说自己成功了
+- 依赖局部验证
+- 想着“就这一次”
+- 因为累了只想赶快结束
+- **任何在没跑验证前就暗示成功的表述**
 
-## Rationalization Prevention
+## 反借口表
 
-| Excuse | Reality |
+| 借口 | 现实 |
 |--------|---------|
-| "Should work now" | RUN the verification |
-| "I'm confident" | Confidence ≠ evidence |
-| "Just this once" | No exceptions |
-| "Linter passed" | Linter ≠ compiler |
-| "Agent said success" | Verify independently |
-| "I'm tired" | Exhaustion ≠ excuse |
-| "Partial check is enough" | Partial proves nothing |
-| "Different words so rule doesn't apply" | Spirit over letter |
+| "现在应该可以了" | 去运行验证 |
+| "我很有信心" | 信心不等于证据 |
+| "就这一次" | 没有例外 |
+| "Linter 过了" | Linter 不等于编译器 |
+| "代理说成功了" | 你必须独立验证 |
+| "我太累了" | 疲惫不是借口 |
+| "跑一部分就够了" | 局部验证什么都证明不了 |
+| "我换个说法，这条规则就不算" | 精神比字面更重要 |
 
-## Key Patterns
+## 关键模式
 
-**Tests:**
+**测试：**
 ```
 ✅ [Run test command] [See: 34/34 pass] "All tests pass"
 ❌ "Should pass now" / "Looks correct"
 ```
 
-**Regression tests (TDD Red-Green):**
+**回归测试（TDD 红绿循环）：**
 ```
 ✅ Write → Run (pass) → Revert fix → Run (MUST FAIL) → Restore → Run (pass)
 ❌ "I've written a regression test" (without red-green verification)
 ```
 
-**Build:**
+**构建：**
 ```
 ✅ [Run build] [See: exit 0] "Build passes"
 ❌ "Linter passed" (linter doesn't check compilation)
 ```
 
-**Requirements:**
+**需求：**
 ```
 ✅ Re-read plan → Create checklist → Verify each → Report gaps or completion
 ❌ "Tests pass, phase complete"
 ```
 
-**Agent delegation:**
+**代理委派：**
 ```
 ✅ Agent reports success → Check VCS diff → Verify changes → Report actual state
 ❌ Trust agent report
 ```
 
-## Why This Matters
+## 为什么这很重要
 
-From 24 failure memories:
-- your human partner said "I don't believe you" - trust broken
-- Undefined functions shipped - would crash
-- Missing requirements shipped - incomplete features
-- Time wasted on false completion → redirect → rework
-- Violates: "Honesty is a core value. If you lie, you'll be replaced."
+从 24 条失败记忆来看：
+- 你的人工伙伴说过 "I don't believe you" - 信任已经被破坏
+- 未定义函数被交付出去 - 运行时会直接崩
+- 缺失需求的功能被交付出去 - 功能根本不完整
+- 因为虚假的“已完成”而浪费时间，最后只能返工
+- 这还违反了："Honesty is a core value. If you lie, you'll be replaced."
 
-## When To Apply
+## 何时应用
 
-**ALWAYS before:**
-- ANY variation of success/completion claims
-- ANY expression of satisfaction
-- ANY positive statement about work state
-- Committing, PR creation, task completion
-- Moving to next task
-- Delegating to agents
+**以下情况之前一律要做：**
+- 任何形式的成功或完成声明
+- 任何满意表达
+- 任何关于工作状态的正面判断
+- 提交、创建 PR、宣告任务完成之前
+- 进入下一个任务之前
+- 把工作委派给代理之前
 
-**Rule applies to:**
-- Exact phrases
-- Paraphrases and synonyms
-- Implications of success
-- ANY communication suggesting completion/correctness
+**这条规则适用于：**
+- 原句
+- 同义改写
+- 含蓄暗示成功的表达
+- 任何会让人理解为“已经完成/已经正确”的沟通内容
 
-## The Bottom Line
+## 底线
 
-**No shortcuts for verification.**
+**验证没有捷径。**
 
-Run the command. Read the output. THEN claim the result.
+先跑命令，读完输出，再声称结果成立。
 
-This is non-negotiable.
+这没有讨价还价空间。
